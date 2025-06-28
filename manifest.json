@@ -1,0 +1,16 @@
+{
+  "name": "Bathroom Photo App",
+  "short_name": "BathroomPhoto",
+  "description": "Professional photo capture for bathroom renovations",
+  "theme_color": "#2196F3",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
