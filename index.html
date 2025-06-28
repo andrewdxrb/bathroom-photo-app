@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bathroom Photo Capture</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="styles.css">
+    <meta name="theme-color" content="#2196F3">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏗️ Bathroom Photo App</h1>
+            <p>Professional photo capture for bathroom renovations</p>
+        </header>
+
+        <div class="section">
+            <h2>Welcome!</h2>
+            <p>This app helps contractors capture and organize bathroom renovation photos.</p>
+            
+            <div style="text-align: center; margin: 30px 0;">
+                <a href="login.html" class="auth-btn" style="display: inline-block; text-decoration: none; padding: 15px 30px; background: #2196F3; color: white; border-radius: 8px; margin: 10px;">
+                    🔐 Login to Start
+                </a>
+            </div>
+
+            <div id="auth-status" style="margin-top: 20px; text-align: center;"></div>
+        </div>
+
+        <div class="section">
+            <h3>Features</h3>
+            <ul style="list-style-type: none; padding: 0;">
+                <li style="padding: 8px 0;">📷 Smart photo capture and tagging</li>
+                <li style="padding: 8px 0;">☁️ Secure cloud storage with Dropbox</li>
+                <li style="padding: 8px 0;">🏷️ Automatic photo categorization</li>
+                <li style="padding: 8px 0;">📱 Mobile-optimized interface</li>
+                <li style="padding: 8px 0;">🔒 Secure authentication</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>Demo Credentials</h3>
+            <p style="background: #f8f9fa; padding: 15px; border-radius: 6px; font-family: monospace;">
+                <strong>Admin:</strong> admin / admin123<br>
+                <strong>User:</strong> demo / demo123
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Check authentication status
+        async function checkAuth() {
+            const token = localStorage.getItem('auth_token');
+            const statusDiv = document.getElementById('auth-status');
+            
+            if (token) {
+                statusDiv.innerHTML = `
+                    <div class="status-success">
+                        ✅ Already logged in! 
+                        <button onclick="logout()" class="link-btn">Logout</button>
+                    </div>
+                `;
+            } else {
+                statusDiv.innerHTML = `
+                    <div class="status-info">
+                        ℹ️ Please log in to access the photo capture features.
+                    </div>
+                `;
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('auth_token');
+            localStorage.removeItem('user_role');
+            localStorage.removeItem('username');
+            window.location.reload();
+        }
+
+        // Test API connection
+        async function testAPI() {
+            try {
+                const response = await fetch('/api/health');
+                console.log('API Health Check:', response.ok ? 'Working' : 'Failed');
+            } catch (error) {
+                console.log('API Connection:', 'Failed', error);
+            }
+        }
+
+        // Initialize
+        checkAuth();
+        testAPI();
+    </script>
+</body>
+</html>
